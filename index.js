@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import './db';
 import {loadUsers, loadMovies} from './seedData';
 import usersRouter from './api/users';
-import genresRouter from './api/genres'
 import session from 'express-session';
 import passport from './authenticate';
 
@@ -43,10 +42,9 @@ app.use(passport.initialize());
 // Add passport.authenticate(..)  to middleware stack for protected routes​
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/genres', genresRouter)
 app.use(errHandler);
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
 
-module.exports = app;
+module.exports = server;
