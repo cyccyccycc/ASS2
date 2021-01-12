@@ -80,9 +80,9 @@ describe("Users endpoint", () => {
         .expect(200)
         .then((res) => {
           expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(2);
+          expect(res.body.length).to.equal(3);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1", "user3"]);
+          expect(result).to.have.members(["user1","user2", "user3"]);
         });
     });
   });
