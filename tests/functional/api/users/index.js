@@ -86,4 +86,50 @@ describe("Users endpoint", () => {
         });
     });
   });
+  describe("POST / Movie favourites ", function() {
+    this.timeout(10000);
+    beforeEach( (done) =>{
+      request(api)
+      .post("/api/users/user1/favourites")
+      .send({
+        id: 577922
+      });
+      done();
+    });
+    it("should retun the message Already in favourites and a 401 status", (done) =>{
+      request(api)
+      .post("/api/users/user1/favourites")
+      .send({
+        id: 577922
+      })
+      .expect(401)
+      .expect({ code: 401, msg: 'Already in favourites.' });
+      done();
+    });
+    it("should return a 201 status, favourites and user message", (done) =>{
+        request(api)
+        .post("/api/users/user1/favourites")
+        .send({
+          id: 590706
+        })
+        .expect(201)
+        .end((err,res)=> {
+          expect(res.body).to.be.a("Object");
+          done();
+        })
+        it("should return the movies added to the user favourites")
+          request(api)
+          .get("api/users/user1/favourites")
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(200)
+          .end((err,res)=> {
+            expect(res.body).to.be.a("array");
+            let result = res.body.map((favourite) => favourite.id);
+            expect(result).to.have.members([590706]);
+            done();
+          });
+    });
+  });
+
 });
