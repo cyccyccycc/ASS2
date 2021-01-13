@@ -15,6 +15,8 @@ const users = [
     }
 ]
 
+const movieId=577922
+
 describe("Users endpoint", () => {
   before(() => {
     mongoose.connect(process.env.mongoDB, {
@@ -86,50 +88,32 @@ describe("Users endpoint", () => {
         });
     });
   });
-  describe("POST / Movie favourites ", function() {
-    this.timeout(10000);
-    beforeEach( (done) =>{
-      request(api)
-      .post("/api/users/user1/favourites")
-      .send({
-        id: 577922
-      });
-      done();
-    });
-    it("should retun the message Already in favourites and a 401 status", (done) =>{
-      request(api)
-      .post("/api/users/user1/favourites")
-      .send({
-        id: 577922
-      })
-      .expect(401)
-      .expect({ code: 401, msg: 'Already in favourites.' });
-      done();
-    });
-    it("should return a 201 status, favourites and user message", (done) =>{
-        request(api)
-        .post("/api/users/user1/favourites")
-        .send({
-          id: 590706
-        })
-        .expect(201)
-        .end((err,res)=> {
-          expect(res.body).to.be.a("Object");
-          done();
-        })
-        it("should return the movies added to the user favourites")
-          request(api)
-          .get("api/users/user1/favourites")
-          .set("Accept", "application/json")
-          .expect("Content-Type", /json/)
-          .expect(200)
-          .end((err,res)=> {
-            expect(res.body).to.be.a("array");
-            let result = res.body.map((favourite) => favourite.id);
-            expect(result).to.have.members([590706]);
-            done();
-          });
-    });
-  });
+ // describe("POST / Movie favourites ", function() {
+ //   it("should return a 201 status, favourites and user message, and we can find it in favourite", (done) =>{
+ //       request(api)
+ //       .post("/api/users/user1/favourites")
+ //       .send({
+ //         id: movieId
+ //       })
+ //       .expect(201)
+ //       .end((err,res)=> {
+ //         expect(res.body).to.be.a("Object");
+ //        done();
+ //       })
+ //       it("should mean that we can find it in favourite", (done) =>{
+ //         request(api)
+ //        .get("api/users/user1/favourites")
+ //         .set("Accept", "application/json")
+  //        .expect("Content-Type", /json/)
+   //       .expect(200)
+     //     .end((err,res)=> {
+     //       expect(res.body).to.be.a("array");
+      //      let result = res.body.map((favourite) => favourite.id);
+      //      expect(result).to.have.members([577922]);
+     //       done();
+       //   });
+     //   });
+//    });
+//  });
 
 });
