@@ -12,7 +12,7 @@ const users = [
     {
       username: "user1",
       password: "test1",
-    },
+    }
 ]
 
 describe("Users endpoint", () => {
@@ -45,7 +45,7 @@ describe("Users endpoint", () => {
     delete require.cache[require.resolve("../../../../index")];
   });
   describe("GET /users ", () => {
-    it("should return the 2 users and a status 200", (done) => {
+    it("should return the 1 users and a status 200", (done) => {
       request(api)
         .get("/api/users")
         .set("Accept", "application/json")
@@ -55,11 +55,12 @@ describe("Users endpoint", () => {
           expect(res.body).to.be.a("array");
           expect(res.body.length).to.equal(1);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1"],);
+          expect(result).to.have.members(["user1"]);
           done();
         });
     });
   });
+
   describe("POST / ", () => {
     it("should return a 200 status and the confirmation message", () => {
       return request(api)
