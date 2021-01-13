@@ -3,11 +3,11 @@ import request from "supertest";
 import api from "../../../../index";  // Express API application 
 
 const expect = chai.expect;
-const currentMovieId = 590706;
-const currentMovieTitle = "Jiu Jitsu";
+const currentActorId = 1253360;
+const currentActorName = "Pedro Pascal";
 let token;
 
-describe('Movies endpoint',  function (){
+describe('Actors endpoint',  function (){
     this.timeout(5000)
     before((done)=>{
         setTimeout(()=>{
@@ -28,10 +28,10 @@ describe('Movies endpoint',  function (){
         });
       });
   
-    describe("GET /movies ", () => {
-        it("should check token and return the 20 movies", (done) => {
+    describe("GET /actors ", () => {
+        it("should check token and return the 20 actors", (done) => {
             request(api)
-            .get("/api/movies")
+            .get("/api/actor")
             .set("Accept", "application/json")
             .set("Authorization", token)
             .expect("Content-Type", /json/)
@@ -43,32 +43,19 @@ describe('Movies endpoint',  function (){
             });
           });
         });
-        describe("GET /movies/:id", () => {
+        describe("GET /actors/:id", () => {
           describe("when the id is valid", () => {
-            it("should return the matching movie", () => {
+            it("should return the matching actor", () => {
               return request(api)
-                .get(`/api/movies/${currentMovieId}`)
+                .get(`/api/actor/${currentActorId}`)
                 .set("Accept", "application/json")
                 .set("Authorization", token)
                 .expect("Content-Type", /json/)
                 .expect(200)
                 .then((res) => {
-                  expect(res.body).to.have.property("title", currentMovieTitle);
+                  expect(res.body).to.have.property("name", currentActorName);
                 });
             });
           });
-          describe("when the id is invalid", () => {
-            it("should return the NOT found message", () => {
-              return request(api)
-                .get("/api/movies/999")
-                .set("Accept", "application/json")
-                .set("Authorization", token)
-                .expect("Content-Type", /json/)
-                .expect({
-                  message: "Unable to find movie with id: 999.",
-                  status: 404,
-                });
-            });
-        });
     });  
 });
