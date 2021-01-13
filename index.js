@@ -3,9 +3,10 @@ import express from 'express';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
-import {loadUsers, loadMovies, loadActors} from './seedData';
+import {loadUsers, loadMovies, loadActors, loadNowplaying} from './seedData';
 import usersRouter from './api/users';
 import actorsRouter from './api/actor';
+import nowplayingRouter from './api/nowplaying';
 import session from 'express-session';
 import passport from './authenticate';
 
@@ -23,6 +24,7 @@ const errHandler = (err, req, res, next) => {
     loadUsers();
     loadMovies();
     loadActors();
+    loadNowplaying();
   }
 const app = express();
 
@@ -45,6 +47,7 @@ app.use(passport.initialize());
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/actor', actorsRouter);
+app.use('/api/nowplaying', nowplayingRouter);
 app.use(errHandler);
 const server = app.listen(port, () => {
   console.info(`Server running at ${port}`);

@@ -1,8 +1,10 @@
 import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import actorModel from '../api/actor/actorModel';
+import nowplayingModel from '../api/nowplaying/nowplayingModel';
 import {movies} from './movies.js';
 import {actors} from './actors.js';
+import {nowplaying} from './nowplaying.js';
 const users = [
   {
     'username': 'user1',
@@ -47,5 +49,17 @@ export async function loadMovies() {
       console.info(`${actors.length} actors were successfully stored.`);
     } catch (err) {
       console.error(`failed to Load actor Data: ${err}`);
+    }
+  }
+
+  export async function loadNowplaying() {
+    console.log('load seed nowplaying data');
+    console.log(nowplaying.length);
+    try {
+      await nowplayingModel.deleteMany();
+      await nowplayingModel.collection.insertMany(nowplaying);
+      console.info(`${nowplaying.length} nowplaying were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load nowplaying Data: ${err}`);
     }
   }
