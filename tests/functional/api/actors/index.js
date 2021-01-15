@@ -3,8 +3,8 @@ import request from "supertest";
 import api from "../../../../index";  // Express API application 
 
 const expect = chai.expect;
-const currentActorId = 1253360;
-const currentActorName = "Pedro Pascal";
+const currentActorId = 1245;
+const currentActorName = "Scarlett Johansson";
 let token;
 
 describe('Actors endpoint',  function (){

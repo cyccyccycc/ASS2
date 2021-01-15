@@ -4,12 +4,11 @@ const Schema = mongoose.Schema;
 
 const NowplayingSchema = new Schema({
   adult: { type: Boolean },
-  id: { type: Number, required: true, unique: true },
+  id: { type: Number },
   poster_path: { type: String },
   overview: { type: String },
   release_date: { type: String },
   original_title: { type: String },
-  genre_ids: [{ type: Number }],
   original_language: { type: String },
   title: { type: String },
   backdrop_path: { type: String },
@@ -17,18 +16,6 @@ const NowplayingSchema = new Schema({
   vote_count: { type: Number },
   video: { type: Boolean },
   vote_average: { type: Number },
-  production_countries: [{
-  iso_3166_1: { type: String },
-  name: { type: String }
-  }],
-  runtime: { type: Number },
-  spoken_languages: [{
-  iso_639_1: { type: String },
-  name: { type: String }
-  }],
-  status: { type: String },
-  tagline: { type: String },
-  reviews:[{type: String, ref: 'User'}]
 });
 
 NowplayingSchema.statics.findByMovieDBId = function (id) {
