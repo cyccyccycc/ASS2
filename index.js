@@ -12,6 +12,10 @@ import actordetailRouter from './api/actordetail';
 import nowplayingRouter from './api/nowplaying';
 import session from 'express-session';
 import passport from './authenticate';
+import swaggerUi from 'swagger-ui-express'
+
+
+const specs = require('./swagger.json')
 
 dotenv.config();
 const errHandler = (err, req, res, next) => {
@@ -44,10 +48,10 @@ app.use(session({
     saveUninitialized: true
   }));
 
-app.use(express.static('public'));
 // initialise passport​
 app.use(passport.initialize());
 // Add passport.authenticate(..)  to middleware stack for protected routes​
+
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/movie', onemovieRouter);
@@ -56,6 +60,11 @@ app.use('/api/upcoming', upcomingRouter);
 app.use('/api/actordetail', actordetailRouter);
 app.use('/api/nowplaying', nowplayingRouter);
 app.use(errHandler);
+app.use(
+  "/",
+  swaggerUi.serve,
+  swaggerUi.setup(specs)
+);
 const server = app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });

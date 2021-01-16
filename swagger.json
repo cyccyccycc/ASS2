@@ -1,0 +1,386 @@
+
+    {
+      "openapi": "3.0.0",
+      "info": {
+          "description": "ASS2"
+      },
+      "tags": [
+          {
+              "name": "Upcoming"
+          },
+          {
+              "name": "Movies"
+          },
+          {
+              "name": "actor"
+          },
+          {
+            "name": "actordetail"
+        },
+        {
+            "name": "nowplaying"
+        },
+        {
+            "name": "User"
+        }
+      ],
+
+      "schemes": [
+          "http"
+      ],
+      "paths": {
+        "/api/upcoming": {
+            "get": {
+                "tags": [
+                    "Upcoming"
+                ],
+                "summary": "Get upcoming movies",
+                "description": "Get upcoming movies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return upcoming movies"
+                    }
+                }
+            }
+        },
+        "/api/upcoming/${id}": {
+            "get": {
+                "tags": [
+                    "Upcoming"
+                ],
+                "summary": "Get one specfied upcoming movie",
+                "description": "Get one Upcoming movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one Upcoming movie"
+                    }
+                }
+            }
+        },
+        "/api/nowplaying": {
+            "get": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Get nowplaying movies",
+                "description": "Get nowplaying movies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return nowplaying movies"
+                    }
+                }
+            }
+        },
+        "/api/nowplaying/${id}": {
+            "get": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Get one specfied nowplaying movie",
+                "description": "Get one nowplaying movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one nowplaying movie"
+                    }
+                }
+            }
+        },
+        "/api/actor": {
+            "get": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "Get actors",
+                "description": "Get actors",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return actors"
+                    }
+                }
+            }
+            
+         },
+         "/api/actors/{$id}": {
+            "put": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "Update actor by id",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Actor id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Valid id"
+                    }
+                }
+            }
+        },
+        "/api/actor/${id}": {
+            "get": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "Get one specfied actor",
+                "description": "Get one actor",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one actor"
+                    }
+                }
+            }
+        },
+        "/api/actordetail": {
+            "get": {
+                "tags": [
+                    "actordetail"
+                ],
+                "summary": "Get actor details",
+                "description": "Get actor details",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return actor details"
+                    }
+                }
+            }
+            
+         },
+          "/api/users": {
+              "get": {
+                  "tags": [
+                      "User"
+                  ],
+                  "summary": "Get all the user in database",
+                  "operationId": "getUser",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                        "sucess": true,
+                        "schema": "array"
+                    }
+                }
+              }
+          },
+          "/api/users/{$id}": {
+              "put": {
+                  "tags": [
+                      "User"
+                  ],
+                  "summary": "Update user by username",
+                  "description": "",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "parameters": [
+                      {
+                          "description": "User name",
+                          "required": true
+                      }
+                  ],
+                  "responses": {
+                      "200": {
+                          "description": "Valid id"
+                      }
+                  }
+              }
+          },
+          "/api/users?action=authenticate": {
+              "post": {
+                  "tags": [
+                      "User"
+                  ],
+                  "summary": "Post user data",
+                  "description": "Auth",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "parameters": [
+                      {
+                          "in": "body",
+                          "name": "body",
+                          "description": "User data",
+                          "required": true
+                      }
+                  ],
+                  "responses": {
+                      "200": {
+                          "sucess": true,
+                          "token": "value"
+                      }
+                  }
+              }
+          },
+          "/api/users/{$username}/favourites": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "add favourtie movies to users' favourites",
+                "description": "Auth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "movie",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
+          "/api/users/${username}/favourites": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "get one specifical user's favourtie movies",
+                "description": "Auth",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                       "description": "favourite movies"
+                    }
+                }
+            }
+          },
+          "/api/movies": {
+              "get": {
+                  "tags": [
+                      "Movies"
+                  ],
+                  "summary": "Get all movies",
+                  "description": "Get movies",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "responses": {
+                      "200": {
+                          "description": "return movies"
+                      }
+                  }
+              }
+          },
+          "/api/movies/${id}": {
+              "get": {
+                  "tags": [
+                      "Movies"
+                  ],
+                  "summary": "Get specfied movie",
+                  "description": "Get one",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "responses": {
+                      "200": {
+                          "description": "return one movie"
+                      }
+                  }
+              }
+          },
+          "/api/movies/${id}/reviews": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Get movies reviews",
+                "description": "Get reviews",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return reviews"
+                    }
+                }
+            }
+        },
+        "/api/movies/${id}/reviews": {
+            "post": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "add reviews to a movie",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "reviews",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
+          "/api/movies/${id}": {
+            "delete": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "delete a movie",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "movieId",
+                        "description": "delete",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "success"
+                    }
+                }
+            }
+          }
+
+      }
+    }

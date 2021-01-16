@@ -11,20 +11,19 @@
     "compile:usermodels": "babel ./api/users --out-dir build/api/users",
     "compile:actormodels": "babel ./api/actor --out-dir build/api/actor",
     "compile:actordetailmodels": "babel ./api/actordetail --out-dir build/api/actordetail",
-    "compile:nowplayingmodels":"babel ./api/nowplaying --out-dir build/api/nowplaying",
+    "compile:nowplayingmodels": "babel ./api/nowplaying --out-dir build/api/nowplaying",
     "compile:models": "npm-run-all compile:moviemodels compile:moviesmodels compile:usermodels compile:actormodels compile:nowplayingmodels compile:upcomingmodels compile:actordetailmodels",
-    "compile:upcomingmodels":"babel ./api/upcoming --out-dir build/api/upcoming",
+    "compile:upcomingmodels": "babel ./api/upcoming --out-dir build/api/upcoming",
     "compile:tmdb-api": "babel ./api/tmdb-api.js --out-dir build/api/",
     "compile:seed": "babel ./seedData --out-dir build/seedData",
     "compile:authenticate": "babel ./authenticate --out-dir build/authenticate",
     "compile:routes": "babel ./routes --out-dir build/routes ",
     "compile:app": "babel index.js --out-dir build/",
     "compile:db": "babel db.js --out-dir build/",
-    "compile:all": "npm-run-all compile:models compile:seed compile:authenticate compile:app compile:db",
+    "compile:all": "npm-run-all compile:models compile:seed compile:authenticate compile:app compile:db compile:tmdb-api",
     "postinstall": "rimraf ./build && npm run compile:all",
     "start": "nodemon --exec babel-node index.js",
     "test": " mocha "
-
   },
   "author": "YICHENG CAI",
   "license": "ISC",
@@ -48,7 +47,6 @@
   "engines": {
     "node": "12.18.x"
   },
-
   "dependencies": {
     "@babel/runtime": "^7.6.3",
     "bcrypt-nodejs": "0.0.3",
@@ -58,9 +56,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "node-fetch": "^2.6.1",
+    "openapi-types": "^7.2.3",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.0",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.1.6"
   }
 }
-
