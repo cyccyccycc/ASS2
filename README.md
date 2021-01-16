@@ -33,10 +33,9 @@ Name: YICHENG CAI
 + Get /api/movies - test when the token is invalid-unauthorized and token is valid.- See tests/functional/api/movies/index.js 
 + Get /api/movies/:id - test when the user enter a invalid movies id(not in the database). See tests/functional/api/movies/index.js 
 + Delete /api/movies/:id - test when the movies wanted to be deleted id is invalid condition. See tests/functional/api/movies/index.js 
-+ Post /api/users?action=register - test when the entered words were empty 
-+ Post /api/users?action=register - test when the password is wrong format
-+ Post /api/movies 
-+ Post /api/movies 
++ Post /api/users?action=register - test when the entered words were empty- See tests/functional/api/users/index.js 
++ Post /api/users?action=register - test when the password is wrong format-See tests/functional/api/users/index.js 
++ Post /api/users?action=authenticate - test when enter the wrong user-See tests/functional/api/users/index.js 
 
 ## Continuous Delivery/Deployment.
 

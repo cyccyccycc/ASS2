@@ -89,40 +89,6 @@ describe("Users endpoint", () => {
     });
     
   });
-
-  describe("POST /users?action=register  failed conditons", () => {
-    it("should return a 401 statue message to reject register", () => {
-      return request(api)
-        .post("/api/users?action=register")
-        .send({
-          username: "user4",
-          password: "12",
-        })
-        .expect(401)
-        .expect({ code: 401, msg: 'Bad password format.' });
-     });
-     it("should return a success:false statue message to reject register when entered nothing",() => {
-      return request(api)
-      .post("/api/users?action=register")
-      .send({})
-      .expect({ success: false, msg: 'Please pass username and password.' });
-    });
-    
-  });
-
-
-  describe("POST /api/users?action=authenticate  failed conditons", () => {
-    it("should return a 401 statue message to reject log in", () => {
-      return request(api)
-        .post("/api/users?action=authenticate")
-        .send({
-          username: "user4",
-          password: "12",
-        })
-        .expect(401)
-        .expect({ code: 401, msg: 'Authentication failed. User not found.' });
-     });    
-  });
  // describe("POST / Movie favourites ", function() {
  //   it("should return a 201 status, favourites and user message, and we can find it in favourite", (done) =>{
  //       request(api)
@@ -150,5 +116,37 @@ describe("Users endpoint", () => {
      //   });
 //    });
 //  });
+});
+describe("POST /api/users?action=authenticate  failed conditons", () => {
+  it("should return a 401 statue message to reject log in", () => {
+    return request(api)
+      .post("/api/users?action=authenticate")
+      .send({
+        username: "user4",
+        password: "12",
+      })
+      .expect(401)
+      .expect({ code: 401, msg: 'Authentication failed. User not found.' });
+   });    
+});
 
+
+describe("POST /users?action=register  failed conditons", () => {
+  it("should return a 401 statue message to reject register", () => {
+    return request(api)
+      .post("/api/users?action=register")
+      .send({
+        username: "user4",
+        password: "12",
+      })
+      .expect(401)
+      .expect({ code: 401, msg: 'Bad password format.' });
+   });
+   it("should return a success:false statue message to reject register when entered nothing",() => {
+    return request(api)
+    .post("/api/users?action=register")
+    .send({})
+    .expect({ success: false, msg: 'Please pass username and password.' });
+  });
+  
 });
