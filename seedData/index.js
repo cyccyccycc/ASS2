@@ -82,10 +82,6 @@ export async function loadUsers() {
     }
   }
 
-
-
-
-
   export async function loadUpcomingMovies() {
     console.log('load upcomingmovies');
     try {

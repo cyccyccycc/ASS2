@@ -3,8 +3,8 @@ import request from "supertest";
 import api from "../../../../index";  // Express API application 
 
 const expect = chai.expect;
-const currentMovieId = 590706;
-const currentMovieTitle = "Jiu Jitsu";
+const currentMovieId = 464052;
+const currentMovieTitle = "Wonder Woman 1984";
 let token;
 
 describe('Movies endpoint',  function (){
@@ -86,4 +86,35 @@ describe('Movies endpoint',  function (){
             });
         });
     });  
+    describe("Delete /movies/:id",()=>{
+      describe("when the movie's id invild",()=>{
+        it("should return 200 and delete successfully",()=>{
+            return request(api)
+              .delete(`/api/movies/${currentMovieId}`)
+              .set("Accept", "application/json")
+              .set("Authorization", token)
+              .expect(200)
+              .expect('delete successfully');
+          });
+          it("should should show that movie do not exist in database",() => {
+            return request(api)
+              .get(`/api/movies/${currentMovieId}`)
+              .set("Authorization", token)
+              .expect(404)
+              .expect({
+                message: `Unable to find movie with id: ${currentMovieId}.`,
+                status: 404,
+          });
+        });
+      });
+      describe("when the movie's id invild",()=>{
+        it("should return the message the id is invild and can not be found",()=>{
+          return request(api)
+            .delete(`/api/movies/9999999999`)
+            .set("Accept", "application/json")
+            .set("Authorization", token)
+            .expect("can't find the moive wanted to delete");
+        });
+    });
+  });
 });

@@ -59,12 +59,13 @@ app.use('/api/actor', actorsRouter);
 app.use('/api/upcoming', upcomingRouter);
 app.use('/api/actordetail', actordetailRouter);
 app.use('/api/nowplaying', nowplayingRouter);
-app.use(errHandler);
 app.use(
   "/",
   swaggerUi.serve,
   swaggerUi.setup(specs)
 );
+app.use(errHandler);
+
 const server = app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
