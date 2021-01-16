@@ -9,10 +9,6 @@ let db;
 let api;
 
 const users = [
-    {
-      username: "user1",
-      password: "test1",
-    }
 ]
 
 const movieId=577922
@@ -55,9 +51,9 @@ describe("Users endpoint", () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(1);
+          expect(res.body.length).to.equal(0);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1"]);
+          expect(result).to.have.members([]);
           done();
         });
     });
@@ -74,7 +70,7 @@ describe("Users endpoint", () => {
         .expect(201)
         .expect({ code: 201, msg: 'Successful created new user.' });
     });
-    after(() => {
+    it("should return a 200 status and the confirmation message",() => {
       return request(api)
         .get("/api/users")
         .set("Accept", "application/json")
@@ -82,32 +78,30 @@ describe("Users endpoint", () => {
         .expect(200)
         .then((res) => {
           expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(3);
+          expect(res.body.length).to.equal(2);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1","user2", "user3"]);
+          expect(result).to.have.members(["user1", "user2"]);
         });  
      });
-
-    
   });
 
-  // describe("POST /users?action=register  failed conditons", () => {
-  //   it("should return a 401 statue message to reject register", () => {
-  //     return request(api)
-  //       .post("/api/users?action=register")
-  //       .send({
-  //         username: "user4",
-  //         password: "12",
-  //       })
-  //       .expect(401)
-  //       .expect({ code: 401, msg: 'Bad password format.' });
-  //    });
-  //    it("should return a success:false statue message to reject register when entered nothing",() => {
-  //     return request(api)
-  //     .post("/api/users?action=register")
-  //     .expect({ success: false, msg: 'Please pass username and password.' });
-  //   });
-  // });
+  // // describe("POST /users?action=register  failed conditons", () => {
+  // //   it("should return a 401 statue message to reject register", () => {
+  // //     return request(api)
+  // //       .post("/api/users?action=register")
+  // //       .send({
+  // //         username: "user4",
+  // //         password: "12",
+  // //       })
+  // //       .expect(401)
+  // //       .expect({ code: 401, msg: 'Bad password format.' });
+  // //    });
+  // //    it("should return a success:false statue message to reject register when entered nothing",() => {
+  // //     return request(api)
+  // //     .post("/api/users?action=register")
+  // //     .expect({ success: false, msg: 'Please pass username and password.' });
+  // //   });
+  // // });
  // describe("POST / Movie favourites ", function() {
  //   it("should return a 201 status, favourites and user message, and we can find it in favourite", (done) =>{
  //       request(api)
@@ -136,6 +130,9 @@ describe("Users endpoint", () => {
 //    });
 //  });
 });
+
+
+
 describe("POST /api/users?action=authenticate  failed conditons", () => {
   it("should return a 401 statue message to reject log in", () => {
     return request(api)
