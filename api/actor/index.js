@@ -17,4 +17,16 @@ router.get('/:id', (req,res,next)=>{
 
 
 
+router.put('/:id', async (req, res, next)=>{
+    const id = parseInt(req.params.id);
+    const updateActor = req.body;
+    const actor = await actorModel.findByActorDBId(id);
+    if(actor){
+        actorModel.findByActorDBId(id).then(actor =>res.status(200).send(actor))
+    .catch(next);
+    }else{
+      res.status(404).send({message: `Unable to find actor with id: ${id}.`, status: 404});
+    }
+  });
+
 export default router;
