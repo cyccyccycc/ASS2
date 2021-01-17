@@ -12,7 +12,7 @@ Name: YICHENG CAI
  + Feature  - I create the private router for some functions
  + Feature  - The React app intergration get and post data 
  + Feature  - I add some new api routes and parameterised URL
- + Feature 1 - momgo integration
+ + Feature 1 - momgo integration,Nested Document and/or object referencing in Mongo/Mongoose: i create a lot of models to store in database
  + Feature 2 - user can get one specific actor by id from the database which is collected by using key from TMDB website
  + Feature 3 = user can find one specific actor by id an changer his/her infromation 
  + Feature 4 = user can delete one actor by finding he/her by id
