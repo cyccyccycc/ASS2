@@ -152,3 +152,20 @@ describe("POST /api/users?action=authenticate  failed conditons", () => {
 });
 
 
+  describe("POST /users?action=register  failed conditons", () => {
+    it("should return a 401 statue message to reject register", () => {
+      return request(api)
+        .post("/api/users?action=register")
+        .send({
+          username: "user4",
+          password: "12",
+        })
+        .expect(401)
+        .expect({ code: 401, msg: 'Bad password format.' });
+     });
+     it("should return a success:false statue message to reject register when entered nothing",() => {
+      return request(api)
+      .post("/api/users?action=register")
+      .expect({ success: false, msg: 'Please pass username and password.' });
+    });
+  });
