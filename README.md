@@ -49,11 +49,11 @@ Give an overview of your web API design, perhaps similar to the following:
 | /api/movies/:id |Gets one specific movies | N/A | N/A |Delete one movie by movie_id
 | /api/movies/:id/review |Gets reviews of one movie |Add reviews to one movie| N/A |
 | /api/movies/:id/similarmovies |Gets simialr movies about one movies |Add similar movies to one movie| N/A |
-| /api/movie/:id |Gets detailed infromation of one movies | N/A | N/A |
+| /api/movie/:id |Gets detailed infromation of one movies |Add movie detail | N/A |
 | /api/upcoming |Gets a list of upcoming movies | N/A | N/A |
 | /api/upcoming/:id |Gets one specific upcoming movie| N/A | N/A | Delete one upcoming movie by id
 | /api/nowplaying |Gets a list of nowplaying movies | N/A | N/A |
-| /api/nowplaying/:id/simialr |Gets similar movies movies |Add similar movies about one nowplaying movie | N/A |
+| /api/nowplaying/:id/simialrmovies |Gets similar movies movies |Add similar movies about one nowplaying movie | N/A |
 | /api/users |Gets a list of users in database |Add new user to the database | N/A |
 | /api/users/:id |N/A | N/A | update a user infromation |
 | /api/users/:username/favourites |Gets one user's favourites |Add movies into one user's favourite| N/A |
