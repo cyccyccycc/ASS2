@@ -115,6 +115,30 @@
             }
             
          },
+         "/api/actor/${id}": {
+            "delete": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "delete a actor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "actorId",
+                        "description": "delete",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
          "/api/actors/{$id}": {
             "put": {
                 "tags": [
@@ -347,6 +371,47 @@
                         "in": "body",
                         "name": "body",
                         "description": "reviews",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
+          "/api/nowplaying/${id}/similarmovies": {
+            "get": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Get movies similarmovies",
+                "description": "Get similarmovies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return similarmovies"
+                    }
+                }
+            }
+        },
+        "/api/nowplaying/${id}/similarmovies": {
+            "post": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "add similarmovies to a movie",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "similarmovies",
                         "required": true
                     }
                 ],

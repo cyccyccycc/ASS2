@@ -62,3 +62,10 @@ export const getMovies = () => {
     .then(res=>res.json())
     .then(json=>json.results);
   }
+
+
+  export const getsimilarmovies = movie_id => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${process.env.TMDB_KEY}`
+    ).then(res => res.json());
+  };

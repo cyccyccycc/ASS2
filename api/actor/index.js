@@ -29,4 +29,15 @@ router.put('/:id', async (req, res, next)=>{
     }
   });
 
+  router.delete('/:id', async (req,res, next)=>{
+    const id = parseInt(req.params.id);
+    const actor = await actorModel.findByActorDBId(id);
+    if(actor){
+      actorModel.deleteOne({id: id}).then(res.status(200).send("delete successfully"))
+    .catch(next);
+    } else{
+      res.status(404).send("can't find the actor wanted to delete");
+    }
+  });
+
 export default router;

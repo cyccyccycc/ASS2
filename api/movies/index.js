@@ -1,7 +1,7 @@
 import express from 'express';
 import movieModel from './movieModel'
 import {
-  getMovieReviews
+  getMovieReviews,getsimilarmovies
 } from '../tmdb-api';
 
 const router = express.Router();
@@ -62,7 +62,31 @@ router.delete('/:id', async (req,res, next)=>{
   }
 });
 
+router.get('/:id/similarmovies', async(req, res, next) => {
+  try{
+    const id = parseInt(req.params.id);
+  const similarmovies=await getsimilarmovies(id)
+  res.status(200).send(similarmovies);
+  }
+  catch{
+    console.log(err)
+  }
+});
 
-
-
+router.post('/:id/similarmovies', async (req, res, next) => {
+  try{
+    const id = parseInt(req.params.id);
+    const newsimilarmovies = req.body.original_title;
+    const movie = await movieModel.findByMovieDBId(id);
+    if(movie.original_title.indexOf(newsimilarmovies) === -1){
+    await movie.original_title.push(newsimilarmovies);
+    }else{
+      res.status(405).send("newsimilarmovies already exists");
+    }
+    await movie.save(); 
+    res.status(201).json(movie);
+  }catch(error){
+    next(error);
+  }
+})
 export default router;

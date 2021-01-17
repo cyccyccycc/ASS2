@@ -1,3 +1,121 @@
+# Assignment 2 - Web API.
+
+Name: YICHENG CAI
+
+## Features.
+
+...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
+ 
+ + Feature 1 - user can get actor from the database which is collected by using key from TMDB website
+ + Feature 2 - user can get one specific actor by id from the database which is collected by using key from TMDB website
+ + Feature 3 = user can find one specific actor by id an changer his/her infromation 
+ + Feature 4 = user can delete one actor by finding he/her by id
+ + Feature 5 = user can check one specific detailed infromation
+ + Feature 6 = user can get one specific movie's review
+ + Feature 7 = user can add some new reviews into one movie's review
+ + Feature 8 = user delete one specific movie by id
+ + Feature 9 = user can get All of the similar movies about one specific movie
+ + Feature 10 = user can add some similar movies about one specific movie
+ + Feature 11 = user can get the nowplaying movies
+ + Feature 12 = user can get the similar movies about one specific nowplaying movie
+ + Feature 13 = user can get the upcoming movies
+
+## Installation Requirements
+
+Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB instance, any other 3rd party software not in the package.json). 
+
+
+npm install oepnapi-types
+npm install -g swagger
+
+## API Configuration
+Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
+REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
+
+NODE_ENV=development
+PORT=8080
+HOST=localhost
+TMDB_KEY= YOUR_TMDB_KEY
+mongodb=YOU_CLOUD_MONGOdb_KEY
+SEED_DB=true
+SECRET=ilikecake
+
+## API Design
+Give an overview of your web API design, perhaps similar to the following: 
+
+|  |  GET | POST | PUT | DELETE
+| -- | -- | -- | -- | -- 
+| /api/movies |Gets a list of movies | N/A | N/A |
+| /api/movies/:id |Gets one specific movies | N/A | N/A |Delete one movie by movie_id
+| /api/movies/:id/review |Gets reviews of one movie |Add reviews to one movie| N/A |
+| /api/movies/:id/similarmovies |Gets simialr movies about one movies |Add similar movies to one movie| N/A |
+| /api/movie/:id |Gets detailed infromation of one movies | N/A | N/A |
+| /api/upcoming |Gets a list of upcoming movies | N/A | N/A |
+| /api/upcoming/:id |Gets one specific upcoming movie| N/A | N/A | Delete one upcoming movie by id
+| /api/nowplaying |Gets a list of nowplaying movies | N/A | N/A |
+| /api/nowplaying/:id/simialr |Gets similar movies movies |Add similar movies about one nowplaying movie | N/A |
+| /api/users |Gets a list of users in database |Add new user to the database | N/A |
+| /api/users/:id |N/A | N/A | update a user infromation |
+| /api/users/:username/favourites |Gets one user's favourites |Add movies into one user's favourite| N/A |
+
+If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+I bulid the swagger document in Heroku
+## Security and Authentication
+Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+
+protect routes:
+
++ /api/actordetail Put
++ /api/actordetail Get
++ /api/actordetail Delete
++ /api/movie Get
++ /api/movie Post
++ /api/upcoming  GET
++ /api/upcoming  Delete
++ /api/nowplaying Get
++ /api/nowplaying Post
+
+## Integrating with React App
+
+Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
+
+~~~Javascript
+export const getMovies = () => {
+  return fetch(
+     '/api/movies',{headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'get',
+  }
+  ).then(res => res.json());
+};
+
+export const getMovie = id => {
+  return fetch(`/api/movie/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': window.localStorage.getItem('token')
+    },
+    method: 'get',
+    
+}).then(res => res.json())
+};
+~~~
+link to the React App repo: https://github.com/cyccyccycc/wad2-moviesApp
+## Extra features
+
+. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
+
+I bulid the swagger document in Heroku
+
+## Independent learning.
+
+. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
+
++ swagger UI
+i learnt to build the swagger Ui in my Heroku app, and i implement the swagger with the swagger in this assignment
+
+
 # Assignment 2 - Agile Software Practice.
 
 Name: YICHENG CAI
@@ -15,7 +133,10 @@ Name: YICHENG CAI
 + delete /api/movies/:id - delete one movie by finding it use its id  
 + Get /api/movie/:id - get movie's detail infromation  
 + Get /api/upcoming - get upcoming movies  
++ Delete /api/upcoming - delete upcoming movie by id
 + Get /api/nowplaying - get nowplaying movies 
++ Post /api/nowplaying/:id/similarmovies - add some similar movies about one specific movie
++ Get /api/nowplaying/:id/similarmovies - get a list of  similar movies about one specific movie
 + Get /api/actor - get all actors  
 + Get /api/actordetail - get actor's detail  
 + Get /api/acotr/:id - get one specific actor  
@@ -25,6 +146,7 @@ Name: YICHENG CAI
 + Put /api/users/:id -  update the user's information  
 + Post /api/users/:username/favourites - add the user's favoutite movies into the favourites 
 + Get /api/users/:username/favourites - get all of movies in one specific user favourites 
+
 ## Error/Exception Testing.
 
 .... From the list of endpoints above, specify those that have error/exceptional test cases in your test code, the relevant test file and the nature of the test case(s), e.g.
