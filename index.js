@@ -52,13 +52,13 @@ app.use(session({
 app.use(passport.initialize());
 // Add passport.authenticate(..)  to middleware stack for protected routes​
 
-app.use('/api/movies', moviesRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/movie', passport.authenticate('jwt', {session: false}), onemovieRouter);
 app.use('/api/actor', actorsRouter);
 app.use('/api/upcoming',passport.authenticate('jwt', {session: false}),  upcomingRouter);
 app.use('/api/actordetail',passport.authenticate('jwt', {session: false}),  actordetailRouter);
-app.use('/api/nowplaying',passport.authenticate('jwt', {session: false}),  nowplayingRouter);
+app.use('/api/nowplaying',  nowplayingRouter);
 app.use(
   "/",
   swaggerUi.serve,

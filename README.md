@@ -59,7 +59,7 @@ Give an overview of your web API design, perhaps similar to the following:
 | /api/users/:username/favourites |Gets one user's favourites |Add movies into one user's favourite| N/A |
 
 If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
-I bulid the swagger document in Heroku
+I bulid the swagger document in [Heroku] https://movies-api-staging123.herokuapp.com/
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
 
@@ -70,10 +70,9 @@ protect routes:
 + /api/actordetail Delete
 + /api/movie Get
 + /api/movie Post
++ /api/movies Get
 + /api/upcoming  GET
 + /api/upcoming  Delete
-+ /api/nowplaying Get
-+ /api/nowplaying Post
 
 ## Integrating with React App
 
@@ -106,15 +105,15 @@ link to the React App repo: https://github.com/cyccyccycc/wad2-moviesApp
 
 . . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
 
-I bulid the swagger document in Heroku
-
+I bulid the swagger document in Heroku and implement the swagger with the swagger in this assignment
+![][swagger]
 ## Independent learning.
 
 . . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
 
 + swagger UI
 i learnt to build the swagger Ui in my Heroku app, and i implement the swagger with the swagger in this assignment
-
+![][Heroku]
 
 # Assignment 2 - Agile Software Practice.
 
@@ -163,18 +162,17 @@ Name: YICHENG CAI
 
 ..... Specify the URLs for the staging and production deployments of your web API, e.g.
 
-+ https://movies-api-trial-staging.herokuapp.com/ - Staging deployment
-+ https://movies-api-production.herokuapp.com/ - Production
++ https://movies-api-staging123.herokuapp.com/ - Staging deployment
++ https://movies-api-product.herokuapp.com/ -Master Production
 
 .... Show a screenshots from the overview page for the two Heroku apps e,g,
 
 + Staging app overview 
 
-![][stagingapp]
-
+![][Heroku]
+![][swagger]
 + Production app overview 
-
-[ , , , screenshot here . . . ]
+![][Production]
 
 [If an alternative platform to Heroku was used then show the relevant page from that platform's UI.]
 
@@ -183,4 +181,6 @@ Name: YICHENG CAI
 ... Specify the feature(s) in your web API that is/are controlled by a feature flag(s). Mention the source code files that contain the Optimizerly code that implement the flags. Show screenshots (with appropriate captions) from your Optimizely account that prove you successfully configured the flags.
 
 
-[stagingapp]: ./img/stagingapp.png
+[Production]: ./img/Production.png
+[Heroku]: ./img/Heroku.png
+[swagger]: ./img/swagger.png

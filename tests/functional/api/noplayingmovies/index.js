@@ -3,8 +3,8 @@ import request from "supertest";
 import api from "../../../../index";  // Express API application 
 
 const expect = chai.expect;
-const currentNowplayingmovieId = 553604;
-const currentNowplayingmovieTitle = "Honest Thief";
+const currentNowplayingmovieId = 464052;
+const currentNowplayingmovieTitle = "Wonder Woman 1984";
 let token;
 
 describe('Nowplaying endpoint',  function (){
