@@ -6,7 +6,13 @@ Name: YICHENG CAI
 
 ...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
  
- + Feature 1 - user can get actor from the database which is collected by using key from TMDB website
+ + Feature  - I writed custom api documentations with the swagger
+ + Feature  - I create models in mongodb to stored the data from the TMDB website
+ + Feature  - Use of express middleware
+ + Feature  - I create the private router for some functions
+ + Feature  - The React app intergration get and post data 
+ + Feature  - I add some new api routes and parameterised URL
+ + Feature 1 - momgo integration
  + Feature 2 - user can get one specific actor by id from the database which is collected by using key from TMDB website
  + Feature 3 = user can find one specific actor by id an changer his/her infromation 
  + Feature 4 = user can delete one actor by finding he/her by id
@@ -27,6 +33,8 @@ Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB i
 
 npm install oepnapi-types
 npm install -g swagger
+npm install swagger-ui express
+
 
 ## API Configuration
 Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
@@ -63,6 +71,37 @@ I bulid the swagger document in [Heroku] https://movies-api-staging123.herokuapp
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
 
+~~~Javascript
+import passport from 'passport';
+import passportJWT from 'passport-jwt';
+import UserModel from './../api/users/userModel';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
+
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = process.env.SECRET;
+const strategy = new JWTStrategy(jwtOptions, async (payload, next) => {
+  const user = await UserModel.findByUserName(payload);
+  if (user) {
+    next(null, user);
+  } else {
+    next(null, false);
+  }
+});
+passport.use(strategy);
+~~~
+
+~~~Javascript
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/movie', passport.authenticate('jwt', {session: false}), onemovieRouter);
+app.use('/api/upcoming',passport.authenticate('jwt', {session: false}),  upcomingRouter);
+app.use('/api/actordetail',passport.authenticate('jwt', {session: false}),  actordetailRouter);
+~~~
 protect routes:
 
 + /api/actordetail Put
@@ -79,6 +118,26 @@ protect routes:
 Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
 
 ~~~Javascript
+export const login = (username, password) => {
+    return fetch('/api/users', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ username: username, password: password })
+    }).then(res => res.json())
+};
+
+export const signup = (username, password) => {
+    return fetch('/api/users?action=register', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ username: username, password: password })
+    }).then(res => res.json())
+};
+
 export const getMovies = () => {
   return fetch(
      '/api/movies',{headers: {
@@ -99,6 +158,41 @@ export const getMovie = id => {
     
 }).then(res => res.json())
 };
+export const getUpcomingMovie = () => {
+    return fetch(
+      '/api/upcoming',{headers: {
+        'Authorization': window.localStorage.getItem('token')
+     },
+     method: 'get',
+   }
+   ).then(res => res.json());
+ };
+  export const getnowplaying = () => {
+    return fetch(
+      '/api/nowplaying',{headers: {
+        'Authorization': window.localStorage.getItem('token')
+     },
+     method: 'get',
+   }
+   ).then(res => res.json());
+ };
+   export const getpeoples = () => {
+    return fetch(
+      '/api/actor',{headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    ).then(res => res.json());
+  };
+  export const getpeopledetail = id => {
+    return fetch(`/api/actordetail/${id}`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      },
+      method: 'get',
+      
+  }).then(res => res.json())
+  };
 ~~~
 link to the React App repo: https://github.com/cyccyccycc/wad2-moviesApp
 ## Extra features

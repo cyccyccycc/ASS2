@@ -9,6 +9,11 @@ let db;
 let api;
 
 const users = [
+  {
+    username: "user5",
+    password: "test5",
+  }
+
 ]
 
 const movieId=577922
@@ -51,9 +56,9 @@ describe("Users endpoint", () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(0);
+          expect(res.body.length).to.equal(1);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members([]);
+          expect(result).to.have.members(["user5"]);
           done();
         });
     });
@@ -78,12 +83,12 @@ describe("Users endpoint", () => {
         .expect(200)
         .then((res) => {
           expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(2);
+          expect(res.body.length).to.equal(3);
           let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1", "user2"]);
+          expect(result).to.have.members(["user1","user5","user2"]);
         });  
      });
-  });
+ });
 
   // // describe("POST /users?action=register  failed conditons", () => {
   // //   it("should return a 401 statue message to reject register", () => {
