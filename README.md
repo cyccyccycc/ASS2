@@ -31,22 +31,22 @@ Name: YICHENG CAI
 Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB instance, any other 3rd party software not in the package.json). 
 
 
-npm install oepnapi-types
-npm install -g swagger
-npm install swagger-ui express
++ npm install oepnapi-types
++ npm install -g swagger
++ npm install swagger-ui express
 
 
 ## API Configuration
 Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
 REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
 
-NODE_ENV=development
-PORT=8080
-HOST=localhost
-TMDB_KEY= YOUR_TMDB_KEY
-mongodb=YOU_CLOUD_MONGOdb_KEY
-SEED_DB=true
-SECRET=ilikecake
++ NODE_ENV=development
++ PORT=8080
++ HOST=localhost
++ TMDB_KEY= YOUR_TMDB_KEY
++ mongodb=YOU_CLOUD_MONGOdb_KEY
++ SEED_DB=true
++ SECRET=ilikecake
 
 ## API Design
 Give an overview of your web API design, perhaps similar to the following: 
